@@ -79,7 +79,7 @@ Antes de empezar, asegúrate de tener instalado:
 
 ### 1️⃣ Clonar el repositorio
 ```bash
-git clone https://github.com/tu-usuario/MYSHOP.git
+git clone https://github.com/tu-usuario/MYSHOP.git //pon tu link
 cd MYSHOP
 2️⃣ Instalar dependencias de PHP
 bash
