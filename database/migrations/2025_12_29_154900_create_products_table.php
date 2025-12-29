@@ -18,6 +18,12 @@ return new class extends Migration
             $table->text('description');
             $table->integer('price');
 
+            // 👇 CAMPOS QUE FALTABAN (del mock)
+            $table->string('brand');
+            $table->string('model');
+            $table->integer('stock');
+            $table->string('image');
+
             $table->foreignId('category_id')
                 ->constrained()
                 ->onDelete('cascade');
@@ -39,4 +45,5 @@ return new class extends Migration
         Schema::dropIfExists('products');
     }
 };
+
 

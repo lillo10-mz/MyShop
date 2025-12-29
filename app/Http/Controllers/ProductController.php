@@ -2,25 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\LoadsMockData;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Offer;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    use LoadsMockData;
-
     /**
      * Display a listing of the resource.
      */
     public function index(): View
     {
-        $products = $this->getProducts();
+        $products = Product::with(['category', 'offer'])->get();
 
-        // Enrich products with offer data and calculate final prices
-        $enrichedProducts = $this->enrichProductsWithOffers($products);
-
-        return view('products.index', ['products' => $enrichedProducts]);
+        return view('products.index', ['products' => $products]);
     }
 
     /**
@@ -28,13 +25,9 @@ class ProductController extends Controller
      */
     public function onSale(): View
     {
-        $products = $this->getProducts();
-        $enrichedProducts = $this->enrichProductsWithOffers($products);
-
-        // Filter only products with offers
-        $productsOnSale = array_filter($enrichedProducts, function ($product) {
-            return $product['offer'] !== null;
-        });
+        $productsOnSale = Product::with(['category', 'offer'])
+            ->whereNotNull('offer_id')
+            ->get();
 
         return view('products.index', ['products' => $productsOnSale]);
     }
@@ -73,22 +66,13 @@ class ProductController extends Controller
             abort(404, 'ID de producto inválido');
         }
 
-        $products = $this->getProducts();
+        $product = Product::with(['category', 'offer'])->find($id);
 
-        // Find product by ID
-        $product = $products[$id] ?? null;
-
-        if (!$product) {
+        if (! $product) {
             abort(404, 'Producto no encontrado');
         }
 
-        // Enrich product with offer data
-        $enrichedProducts = $this->enrichProductsWithOffers([$id => $product]);
-        $product = $enrichedProducts[$id];
-
-        // Get product category
-        $categories = $this->getCategories();
-        $category = $categories[$product['category_id']] ?? null;
+        $category = $product->category;
 
         return view('products.show', compact('product', 'category'));
     }
