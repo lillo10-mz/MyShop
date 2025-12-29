@@ -36,9 +36,9 @@ trait LoadsMockData
         return require database_path('data/mock-products.php');
     }
 
-    /**
-     * Load all mock data at once
-     */
+    /*
+    Load all mock data at once
+
     protected function getAllMockData(): array
     {
         return [
@@ -47,12 +47,13 @@ trait LoadsMockData
             'cart'       => $this->getCart(),
             'products'   => $this->getProducts(),
         ];
-    }
+    } */
 
     /**
      * Enrich products with their offer data and calculate final price
      * This method adds 'offer' and 'final_price' to each product that has an offer
      */
+    /*
     protected function enrichProductsWithOffers(array $products): array
     {
         $offers = $this->getOffers();
@@ -75,5 +76,5 @@ trait LoadsMockData
             return $product;
 
         }, $products);
-    }
+    } */
 }

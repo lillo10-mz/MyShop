@@ -43,4 +43,6 @@ Route::get('/offers/{id}', [OfferController::class, 'show'])->name('offers.show'
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
 // Página de contacto (aun sin controlador, puede ser una vista simple)
-Route::view('/contact', 'contact')->name('contact');
+// Route::view('/contact', 'contact')->name('contact');
+// Contact page
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');

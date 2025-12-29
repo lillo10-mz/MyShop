@@ -2,38 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\LoadsMockData;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CartController extends Controller
 {
-    use LoadsMockData;
-
     /**
      * Show cart overview
      */
     public function index(): View
-    {
-        $cart = $this->getCart();
-        $products = $this->getProducts();
+{
+    $user = User::first();
 
-        // Add product names to cart data
-        $cartWithProducts = [];
+    $cartProducts = $user->products()->with(['category', 'offer'])->get();
 
-        foreach ($cart as $item) {
-            $product = $products[$item['product_id']] ?? null;
+    return view('cart.index', compact('cartProducts'));
+}
 
-            $cartWithProducts[] = array_merge($item, [
-                'name'  => $product ? $product['name'] : 'Producto no encontrado',
-                'price' => $product ? $product['price'] : 0,
-            ]);
-        }
-
-        return view('cart.index', [
-            'cartItems' => $cartWithProducts,
-        ]);
-    }
 
     /**
      * Store a newly created cart item
@@ -59,4 +45,3 @@ class CartController extends Controller
             ->with('success', 'Cantidad actualizada exitosamente');
     }
 }
-

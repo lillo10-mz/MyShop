@@ -2,32 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\LoadsMockData;
-use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\View\View;
 
 class WelcomeController extends Controller
 {
-    use LoadsMockData;
-
     /**
      * Show the welcome page with featured content
      */
     public function index(): View
     {
-        $products = $this->getProducts();
-        $categories = $this->getCategories();
+        // Productos destacados: primeros 3 con oferta
+        $featuredProducts = Product::with(['category', 'offer'])
+            ->whereNotNull('offer_id')
+            ->take(3)
+            ->get();
 
-        // Enrich products with offer data before slicing
-        $enrichedProducts = $this->enrichProductsWithOffers($products);
-
-        // Get featured products (first 3 products for the featured section)
-        $featuredProducts = array_slice($enrichedProducts, 0, 3, true);
-
-        // Get featured categories (first 4 categories for the categories section)
-        $featuredCategories = array_slice($categories, 0, 4, true);
+        // Categorías destacadas: primeras 4
+        $featuredCategories = Category::take(4)->get();
 
         return view('welcome', compact('featuredProducts', 'featuredCategories'));
     }
 }
+
 
