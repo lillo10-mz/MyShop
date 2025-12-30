@@ -20,6 +20,10 @@ class Product extends Model
         'price',
         'category_id',
         'offer_id',
+        'brand',
+        'model',
+        'stock',
+        'image'
     ];
 
     /**

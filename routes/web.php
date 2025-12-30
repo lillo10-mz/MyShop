@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,12 @@ Route::get('/offers/{id}', [OfferController::class, 'show'])->name('offers.show'
 
 // Carrito de la compra
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
+// Añadir producto al carrito (POST)
+Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+
+// Actualizar cantidad (PATCH)
+Route::patch('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
 
 // Página de contacto (aun sin controlador, puede ser una vista simple)
 // Route::view('/contact', 'contact')->name('contact');
