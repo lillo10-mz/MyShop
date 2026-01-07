@@ -6,14 +6,12 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
     use HasFactory;
 
-    /**
-     * Campos que se pueden asignar masivamente.
-     */
     protected $fillable = [
         'name',
         'description',
@@ -23,7 +21,7 @@ class Product extends Model
         'brand',
         'model',
         'stock',
-        'image'
+        'image',
     ];
 
     /**
@@ -34,6 +32,26 @@ class Product extends Model
         return [
             'price' => 'decimal:2',
         ];
+    }
+
+    /**
+     * Calculate the final price after applying offer discount.
+     *
+     * @return Attribute
+     */
+    protected function finalPrice(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if ($this->offer && $this->offer->discount_percentage > 0) {
+                    $discount = $this->price * ($this->offer->discount_percentage / 100);
+
+                    return round($this->price - $discount, 2);
+                }
+
+                return $this->price;
+            },
+        );
     }
 
     /**
@@ -53,29 +71,13 @@ class Product extends Model
     }
 
     /**
-     * Get the users who have this product in their cart (N:M relationship).
+     * The users that have this product in their wishlist.
      */
-    public function users()
+    public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'product_user')
+        return $this->belongsToMany(User::class)
             ->withPivot('quantity')
             ->withTimestamps();
     }
-
-    /**
-     * Get the product's final price after applying discounts.
-     */
-    protected function finalPrice(): Attribute
-    {
-        return Attribute::make(
-            get: function () {
-                if ($this->offer && $this->offer->discount_percentage > 0) {
-                    $discount = $this->price * ($this->offer->discount_percentage / 100);
-                    return round($this->price - $discount, 2);
-                }
-
-                return $this->price;
-            }
-        );
-    }
 }
+
