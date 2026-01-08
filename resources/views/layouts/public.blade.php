@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        @include('partials.head')
-    </head>
+<head>
+    @include('partials.head')
+</head>
 
-    <body class="bg-gray-50">
-        <!-- Header usando partial -->
-        @include('partials.header')
+<body class="bg-gray-50">
+    <!-- Header usando partial -->
+    @include('partials.header')
 
-        <!-- Contenido principal -->
-        <main class="min-h-screen">
-            @yield('content')
-        </main>
+    <!-- Notificaciones Flash -->
+    @include('partials.flash-messages')
 
-        <!-- Footer usando partial -->
-        @include('partials.footer')
+    <!-- Contenido principal -->
+    <main class="min-h-screen">
+        @yield('content')
+    </main>
 
-        @stack('scripts')
-    </body>
+    <!-- Footer usando partial -->
+    @include('partials.footer')
+
+    @stack('scripts')
+</body>
 </html>
+

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Offer;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ProductController extends Controller
 {
@@ -33,28 +34,64 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        // En una aplicación real, aquí se mostraría un formulario para crear un nuevo producto.
-        // En este ejemplo, simplemente redirigimos a la lista de productos.
-        return redirect()
-            ->route('products.index')
-            ->with('success', 'Formulario de creación de producto (simulado)');
+ * Muestra el formulario para crear un nuevo producto.
+ */
+public function create(): View
+{
+    // Cargar todas las categorías y ofertas para los selectores del formulario
+    $categories = Category::all();
+    $offers = Offer::all();
+
+    return view('admin.products.create', compact('categories', 'offers'));
+}
+
+/**
+ * Almacena un nuevo producto en la base de datos.
+ */
+public function store(Request $request): RedirectResponse
+{
+    // PASO 1: Validar todos los datos del formulario, incluyendo la imagen
+    $validated = $request->validate(
+        [
+            'name'        => 'required|string|max:255|unique:products,name',
+            'description' => 'required|string|max:1000',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'price'       => 'required|numeric|min:0|max:999999.99',
+            'category_id' => 'required|exists:categories,id',
+            'offer_id'    => 'nullable|exists:offers,id',
+        ],
+        [
+            'name.required'        => 'El nombre del producto es obligatorio.',
+            'name.unique'          => 'Ya existe un producto con ese nombre.',
+            'description.required' => 'La descripción es obligatoria.',
+            'image.image'          => 'El archivo debe ser una imagen.',
+            'image.mimes'          => 'La imagen debe ser de tipo: jpeg, png, jpg, webp.',
+            'image.max'            => 'La imagen no debe superar los 2MB.',
+            'price.required'       => 'El precio es obligatorio.',
+            'price.numeric'        => 'El precio debe ser un número.',
+            'category_id.required' => 'Debes seleccionar una categoría.',
+            'category_id.exists'   => 'La categoría seleccionada no es válida.',
+            'offer_id.exists'      => 'La oferta seleccionada no es válida.',
+        ]
+    );
+
+    // PASO 2: Procesar la imagen si fue subida
+    if ($request->hasFile('image')) {
+        // Guardar en el disco 'public' dentro de la carpeta 'products'
+        // Laravel genera automáticamente un nombre único para evitar colisiones
+        $imagePath = $request->file('image')->store('products', 'public');
+        $validated['image'] = $imagePath;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        // En una aplicación real, aquí se guardaría en la base de datos
-        // Por ahora, solo redirigimos a la lista de productos
-        return redirect()
-            ->route('products.index')
-            ->with('success', 'Producto creado exitosamente');
-    }
+    // PASO 3: Crear el producto con los datos validados
+    Product::create($validated);
+
+    // PASO 4: Redirigir con mensaje de éxito
+    return redirect()
+        ->route('admin.products.index')
+        ->with('success', '¡Producto creado exitosamente!');
+}
+
 
     /**
      * Display the specified resource.
