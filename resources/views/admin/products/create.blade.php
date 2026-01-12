@@ -54,6 +54,64 @@
                             @enderror
                         </div>
 
+                        {{-- Marca --}}
+                        <div class="mt-4">
+                            <label for="brand" class="block text-sm font-medium text-gray-700">
+                                Marca
+                            </label>
+
+                            <input
+                                type="text"
+                                id="brand"
+                                name="brand"
+                                value="{{ old('brand') }}"
+                                class="mt-1 block w-full"
+                            >
+
+                            @error('brand')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        {{-- Modelo --}}
+                        <div class="mt-4">
+                            <label for="model" class="block text-sm font-medium text-gray-700">
+                                Modelo
+                            </label>
+
+                            <input
+                                type="text"
+                                id="model"
+                                name="model"
+                                value="{{ old('model') }}"
+                                class="mt-1 block w-full"
+                            >
+
+                            @error('model')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        {{-- Stock --}}
+                        <div class="mt-4">
+                            <label for="stock" class="block text-sm font-medium text-gray-700">
+                                Stock
+                            </label>
+
+                            <input
+                                type="number"
+                                id="stock"
+                                name="stock"
+                                value="{{ old('stock') }}"
+                                class="mt-1 block w-full"
+                                min="0"
+                            >
+
+                            @error('stock')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+
                         {{-- Imagen del Producto --}}
                         <div class="mt-4">
                             <label for="image" class="block text-sm font-medium text-gray-700">
