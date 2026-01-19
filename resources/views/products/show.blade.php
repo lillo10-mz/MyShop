@@ -5,6 +5,7 @@
 @section('content')
     <div class="container mx-auto px-6 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
             <!-- Imagen del Producto -->
             <div class="bg-white rounded-lg shadow-lg p-6">
                 <div class="h-96 bg-gray-200 flex items-center justify-center">
@@ -55,8 +56,7 @@
 
                         <a
                             href="{{ route('categories.show', $product->category->id) }}"
-                            class="ml-2 bg-primary-100 text-primary-800 px-3 py-1
-                                   rounded-full text-sm hover:bg-primary-200 transition"
+                            class="ml-2 bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm hover:bg-primary-200 transition"
                         >
                             {{ $product->category->name }}
                         </a>
@@ -71,8 +71,7 @@
                         </span>
 
                         <div class="mt-2">
-                            <span class="inline-block bg-orange-100 text-orange-800
-                                         text-sm px-3 py-1 rounded-full">
+                            <span class="inline-block bg-orange-100 text-orange-800 text-sm px-3 py-1 rounded-full">
                                 🏷 {{ $product->offer->name }}
                                 (-{{ $product->offer->discount_percentage }}%)
                             </span>
@@ -82,21 +81,31 @@
 
                 <!-- Botones de Acción -->
                 <div class="flex items-center space-x-4">
-                    <form action="{{ route('cart.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    @if ($product->stock > 0)
+                        <form action="{{ route('cart.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
 
+                            <button
+                                type="submit"
+                                class="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition"
+                            >
+                                🛒 Añadir al Carrito
+                            </button>
+                        </form>
+                    @else
                         <button
-                            type="submit"
-                            class="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition"
+                            type="button"
+                            disabled
+                            class="bg-gray-300 text-gray-600 px-6 py-3 rounded-lg cursor-not-allowed"
                         >
-                            🛒 Añadir al Carrito
+                            🚫 Sin stock
                         </button>
-                    </form>
+                    @endif
 
                     {{-- Botón de Wishlist (solo para usuarios autenticados) --}}
                     @auth
-                        <form action="{{ route('admin.wishlist.store', $product->id) }}" method="POST">
+                        <form action="{{ route('wishlist.store', $product->id) }}" method="POST">
                             @csrf
                             <button
                                 type="submit"
@@ -118,5 +127,6 @@
         </div>
     </div>
 @endsection
+
 
 

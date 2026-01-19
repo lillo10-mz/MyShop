@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,31 +49,33 @@ Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checko
 // RUTAS DE USUARIO AUTENTICADO (Breeze)
 // ===========================================
 Route::middleware('auth')->group(function () {
-    // Dashboard
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+
+    // Dashboard (CON CONTROLLER)
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Perfil de usuario
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Lista de deseos (para user y admin)
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/{id}', [WishlistController::class, 'store'])->name('wishlist.store');
+    Route::delete('/wishlist/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
 });
 
 // ===========================================
 // RUTAS DE ADMINISTRACIÓN (Protegidas + Logging)
 // ===========================================
+Route::middleware(['auth', 'role:admin', 'log.activity'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
-Route::middleware(['auth', 'log.activity'])->prefix('admin')->name('admin.')->group(function () {
-    // Rutas de gestión de productos
-    Route::get('/products', [ProductController::class, 'adminIndex'])->name('products.index');
-    Route::resource('products', ProductController::class)->except(['index', 'show']);
-    
-    // Rutas para la lista de deseos (Wishlist)
-    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
-    Route::post('/wishlist/{id}', [WishlistController::class, 'store'])->name('wishlist.store');
-    Route::delete('/wishlist/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
-});
+        Route::get('/products', [ProductController::class, 'adminIndex'])->name('products.index');
+        Route::resource('products', ProductController::class)->except(['index', 'show']);
+    });
+
 // Las rutas de autenticación (login, register, etc.) se incluyen desde aquí
 require __DIR__ . '/auth.php';
 

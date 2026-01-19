@@ -24,6 +24,32 @@
             </p>
         </div>
 
+        {{-- Buscador --}}
+        <form method="GET" action="{{ route('products.index') }}" class="mb-6">
+            <div class="flex gap-4">
+                <input
+                    type="text"
+                    name="search"
+                    value="{{ request('search') }}"
+                    placeholder="Buscar productos..."
+                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring focus:ring-primary-200"
+                >
+
+                <button
+                    type="submit"
+                    class="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition"
+                >
+                    🔍 Buscar
+                </button>
+            </div>
+        </form>
+
+        @if(request()->filled('search'))
+            <p class="text-sm text-gray-500 mb-6">
+                Resultados para: <strong>"{{ request('search') }}"</strong>
+            </p>
+        @endif
+
         <div class="product-grid">
             @forelse($products as $product)
                 <x-product-card :product="$product" />
@@ -37,3 +63,4 @@
         </div>
     </div>
 @endsection
+

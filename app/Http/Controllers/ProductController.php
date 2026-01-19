@@ -12,15 +12,24 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(): View
-    {
-        $products = Product::with(['category', 'offer'])->get();
+    public function index(Request $request): View
+{
+    $query = Product::with(['category', 'offer']);
 
-        return view('products.index', ['products' => $products]);
+    if ($request->filled('search')) {
+        $search = $request->input('search');
+
+        $query->where(function ($q) use ($search) {
+            $q->where('name', 'like', "%{$search}%")
+              ->orWhere('description', 'like', "%{$search}%");
+        });
     }
+
+    $products = $query->get();
+
+    return view('products.index', compact('products'));
+}
+
 
     /**
      * Display only products that have an active offer

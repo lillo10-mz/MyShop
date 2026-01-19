@@ -15,16 +15,26 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Tienda') }}
                     </x-nav-link>
+
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    {{-- Enlaces de Administración --}}
-                    <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')">
-                        {{ __('Productos') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.wishlist.index')" :active="request()->routeIs('admin.wishlist.*')">
-                        {{ __('❤️ Lista de Deseos') }}
-                    </x-nav-link>
+
+                    {{-- Productos SOLO si es admin --}}
+                    @auth
+                        @if (auth()->user()->role === 'admin')
+                            <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')">
+                                {{ __('Productos') }}
+                            </x-nav-link>
+                        @endif
+                    @endauth
+
+                    {{-- Wishlist para user y admin (solo logueados) --}}
+                    @auth
+                        <x-nav-link :href="route('wishlist.index')" :active="request()->routeIs('wishlist.*')">
+                            {{ __('❤️ Lista de Deseos') }}
+                        </x-nav-link>
+                    @endauth
                 </div>
             </div>
 
@@ -80,16 +90,26 @@
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Tienda') }}
             </x-responsive-nav-link>
+
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            {{-- Enlaces de Administración --}}
-            <x-responsive-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')">
-                {{ __('Productos') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.wishlist.index')" :active="request()->routeIs('admin.wishlist.*')">
-                {{ __('❤️ Lista de Deseos') }}
-            </x-responsive-nav-link>
+
+            {{-- Productos SOLO si es admin --}}
+            @auth
+                @if (auth()->user()->role === 'admin')
+                    <x-responsive-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')">
+                        {{ __('Productos') }}
+                    </x-responsive-nav-link>
+                @endif
+            @endauth
+
+            {{-- Wishlist para user y admin (solo logueados) --}}
+            @auth
+                <x-responsive-nav-link :href="route('wishlist.index')" :active="request()->routeIs('wishlist.*')">
+                    {{ __('❤️ Lista de Deseos') }}
+                </x-responsive-nav-link>
+            @endauth
         </div>
 
         <!-- Responsive Settings Options -->
@@ -118,3 +138,4 @@
         </div>
     </div>
 </nav>
+
