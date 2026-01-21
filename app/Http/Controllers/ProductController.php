@@ -12,23 +12,69 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function index(Request $request): View
+public function index(Request $request): View
 {
     $query = Product::with(['category', 'offer']);
 
+    // 🔎 Buscar por texto (name + description + brand + model)
     if ($request->filled('search')) {
         $search = $request->input('search');
 
         $query->where(function ($q) use ($search) {
             $q->where('name', 'like', "%{$search}%")
-              ->orWhere('description', 'like', "%{$search}%");
+              ->orWhere('description', 'like', "%{$search}%")
+              ->orWhere('brand', 'like', "%{$search}%")
+              ->orWhere('model', 'like', "%{$search}%");
         });
     }
 
-    $products = $query->get();
+    // 🗂️ Filtrar por categoría
+    if ($request->filled('category_id')) {
+        $query->where('category_id', $request->input('category_id'));
+    }
 
-    return view('products.index', compact('products'));
+    // 🏷️ Solo ofertas
+    if ($request->boolean('on_sale')) {
+        $query->whereNotNull('offer_id');
+    }
+
+    // ✅ Solo con stock
+    if ($request->boolean('in_stock')) {
+        $query->where('stock', '>', 0);
+    }
+
+    // ↕️ Ordenar
+    $sort = $request->input('sort', 'newest');
+
+    switch ($sort) {
+        case 'price_asc':
+            $query->orderBy('price', 'asc');
+            break;
+
+        case 'price_desc':
+            $query->orderBy('price', 'desc');
+            break;
+
+        case 'name_asc':
+            $query->orderBy('name', 'asc');
+            break;
+
+        case 'name_desc':
+            $query->orderBy('name', 'desc');
+            break;
+
+        case 'newest':
+        default:
+            $query->latest();
+            break;
+    }
+
+    $products = $query->get();
+    $categories = Category::orderBy('name')->get();
+
+    return view('products.index', compact('products', 'categories'));
 }
+
 
 
     /**

@@ -1,73 +1,104 @@
 @extends('layouts.public')
 
-@section('title', 'Contacto - Mi Tienda')
+@section('title', 'Contacto - Sesanus')
 
 @section('content')
-    <div class="container mx-auto px-6 py-8">
-        <div class="max-w-2xl mx-auto">
-            <div class="mb-8 text-center">
-                <h1 class="text-3xl font-bold text-gray-900 mb-4">
+    <div class="py-10">
+        <div class="max-w-3xl mx-auto">
+
+            {{-- Cabecera --}}
+            <div class="mb-10 text-center">
+                <h1 class="page-title mb-3">
                     Contacta con Nosotros
                 </h1>
 
-                <p class="text-gray-600">
-                    Estamos aquí para ayudarte. Envíanos un mensaje.
+                <p class="page-subtitle">
+                    ¿Tienes alguna duda, sugerencia o necesitas ayuda?
+                    Escríbenos y te responderemos lo antes posible.
                 </p>
             </div>
 
-            <div
-                class="bg-white rounded-lg shadow-lg p-8 flex flex-col itemscenter
-                       justify-center"
-            >
-                <svg
-                    class="w-20 h-20 text-primary-600 mb-4 animate-bounce"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    viewBox="0 0 48 48"
-                >
-                    <circle
-                        cx="24"
-                        cy="24"
-                        r="22"
-                        stroke="currentColor"
-                        strokewidth="4"
-                        fill="#e0e7ff"
-                    />
-                    <path
-                        d="M16 32l8-8 8 8"
-                        stroke="currentColor"
-                        strokewidth="3"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        fill="none"
-                    />
-                    <path
-                        d="M24 16v8"
-                        stroke="currentColor"
-                        stroke-width="3"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        fill="none"
-                    />
-                </svg>
+            {{-- Formulario --}}
+            <div class="panel panel-pad">
+                <form action="#" method="POST" class="space-y-6">
+                    {{-- Nombre --}}
+                    <div>
+                        <label class="block text-sm font-bold text-ink mb-2">
+                            Nombre
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Tu nombre"
+                            class="input"
+                        >
+                    </div>
 
-                <h2 class="text-2xl font-bold text-gray-800 mb-2">
-                    ¡En Construcción!
-                </h2>
+                    {{-- Email --}}
+                    <div>
+                        <label class="block text-sm font-bold text-ink mb-2">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            placeholder="tu@email.com"
+                            class="input"
+                        >
+                    </div>
 
-                <p class="text-gray-500 mb-4">
-                    Estamos trabajando para traerte esta funcionalidad muy pronto.
-                </p>
+                    {{-- Asunto --}}
+                    <div>
+                        <label class="block text-sm font-bold text-ink mb-2">
+                            Asunto
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Motivo del mensaje"
+                            class="input"
+                        >
+                    </div>
 
-                <a
-                    href="{{ route('home') }}"
-                    class="inline-block mt-2 px-6 py-2 bg-primary-600 text-white
-                           rounded-lg hover:bg-primary-700 transition"
-                >
-                    Volver al inicio
-                </a>
+                    {{-- Mensaje --}}
+                    <div>
+                        <label class="block text-sm font-bold text-ink mb-2">
+                            Mensaje
+                        </label>
+                        <textarea
+                            rows="5"
+                            placeholder="Escribe aquí tu mensaje..."
+                            class="input resize-none"
+                        ></textarea>
+                    </div>
+
+                    {{-- Botón --}}
+                    <div class="pt-2 flex justify-end">
+                        <button type="submit" class="btn-primary">
+                            ✉️ Enviar Mensaje
+                        </button>
+                    </div>
+                </form>
             </div>
+
+            {{-- Info adicional --}}
+            <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="panel panel-pad">
+                    <div class="text-3xl mb-2">📞</div>
+                    <p class="font-bold text-ink">Teléfono</p>
+                    <p class="text-slate-600">665 137 268</p>
+                </div>
+
+                <div class="panel panel-pad">
+                    <div class="text-3xl mb-2">📧</div>
+                    <p class="font-bold text-ink">Email</p>
+                    <p class="text-slate-600">migzamrui@alu.edu.gva.es</p>
+                </div>
+
+                <div class="panel panel-pad">
+                    <div class="text-3xl mb-2">🕒</div>
+                    <p class="font-bold text-ink">Horario</p>
+                    <p class="text-slate-600">24h · Atención online</p>
+                </div>
+            </div>
+
         </div>
     </div>
 @endsection

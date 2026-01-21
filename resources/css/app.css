@@ -1,3 +1,117 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* =========================
+   SESANUS - BASE
+========================= */
+@layer base {
+  body {
+    @apply bg-slate-50 text-ink antialiased;
+  }
+
+  a {
+    @apply text-primary-700 hover:text-primary-800;
+  }
+}
+
+/* =========================
+   SESANUS - COMPONENTS
+   (clases reutilizables)
+========================= */
+@layer components {
+  /* Contenedor */
+  .container-app {
+    @apply max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Títulos */
+  .page-title {
+    @apply text-3xl font-extrabold text-ink;
+  }
+
+  .page-subtitle {
+    @apply text-slate-600;
+  }
+
+  /* Panel (bloques tipo filtros) */
+  .panel {
+    @apply bg-white border border-slate-200 rounded-xl;
+  }
+
+  .panel-pad {
+    @apply p-4 sm:p-5;
+  }
+
+  /* Inputs / selects */
+  .input,
+  .select {
+    @apply w-full border border-slate-300 rounded-lg px-4 py-2
+           focus:outline-none focus:ring-2 focus:ring-primary-200 focus:border-primary-300;
+  }
+
+  /* Botones */
+  .btn {
+    @apply inline-flex items-center justify-center font-bold rounded-full
+           px-5 py-2 transition;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700;
+  }
+
+  .btn-soft {
+    @apply btn bg-primary-50 text-primary-700 hover:bg-primary-100 border border-primary-200;
+  }
+
+  .btn-muted {
+    @apply btn bg-slate-100 text-slate-800 hover:bg-slate-200;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white border border-slate-200 rounded-xl overflow-hidden;
+  }
+
+  .card-hover {
+    @apply transition hover:border-slate-300 hover:shadow-md;
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-extrabold;
+  }
+
+    /* Ofertas (Sesanus accent) */
+  .badge-offer {
+    @apply badge border bg-accent/15 text-primary-800 border border-accent/40;
+  }
+
+  .btn-offer {
+    @apply btn bg-accent text-primary-900 hover:bg-primary-500 hover:text-white;
+  }
+
+  .card-offer {
+    @apply border-l-4 border-accent;
+  }
+  /* ===== OFERTAS (Sesanus accent) ===== */
+  .offer-ring {
+    @apply ring-1 ring-accent/50;
+  }
+
+  .offer-badge {
+    @apply bg-gradient-to-r from-primary-600 to-accent text-white
+           px-3 py-1 rounded-full font-extrabold text-sm shadow;
+  }
+
+  .offer-surface {
+    @apply bg-gradient-to-br from-primary-50 to-accent/20;
+  }
+
+  .offer-price {
+    @apply text-primary-700;
+  }
+
+  
+}
+

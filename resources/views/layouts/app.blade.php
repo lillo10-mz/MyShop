@@ -9,37 +9,50 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link
-        href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
     @include('partials.head')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+<body class="font-sans antialiased text-slate-900 bg-slate-50">
+    <div class="min-h-screen flex flex-col">
+
+        {{-- NAV --}}
         @include('layouts.navigation')
 
-        <!-- Page Heading -->
+        {{-- HEADER OPCIONAL --}}
         @isset($header)
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <header class="bg-white border-b border-slate-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                     {{ $header }}
                 </div>
             </header>
         @endisset
 
-        <!-- Notificaciones Flash -->
-        @include('partials.flash-messages')
+        {{-- FLASH --}}
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-4">
+            @include('partials.flash-messages')
+        </div>
 
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
+        {{-- CONTENIDO --}}
+        <main class="flex-1">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                {{ $slot }}
+            </div>
         </main>
+
+        {{-- FOOTER --}}
+        <footer class="border-t border-slate-200 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-sm text-slate-500 flex items-center justify-between">
+                <span>© {{ date('Y') }} {{ config('app.name') }}</span>
+                <span class="hidden sm:inline">Proyecto tienda</span>
+            </div>
+        </footer>
+
     </div>
 </body>
 </html>
+
 

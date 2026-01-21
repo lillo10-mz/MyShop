@@ -2,74 +2,45 @@
 
 @section('title', 'Bienvenido - Sesanus')
 
-@push('styles')
-    <style>
-        .hero-gradient {
-            background: linear-gradient(
-                135deg,
-                #6997ca 0%,
-                #4b7db2 50%,
-                #63d1c1 100%
-            );
-        }
-    </style>
-@endpush
-
 @section('content')
     <!-- Hero Section -->
-    <section class="hero-gradient text-white py-20">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-                Bienvenido a <span class="text-white">Sesanus</span>
-            </h2>
+    <section class="bg-gradient-to-br from-primary-700 via-primary-500 to-accent text-white py-20 rounded-2xl shadow-sm">
+    <div class="px-6 text-center">
+        <p class="text-white/80 font-semibold tracking-wide mb-3">
+            Sesanus
+        </p>
 
-            <p class="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
-                Suplementos y bienestar para cuidar tu salud, tu descanso
-                y tu rendimiento día a día.
-            </p>
+        <h2 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+            Bienvenido a <span class="text-white">Sesanus</span>
+        </h2>
 
-            <div class="flex flex-wrap justify-center gap-4">
-                <a
-                    href="{{ route('products.index') }}"
-                    class="bg-white text-primary-600 font-bold py-4 px-8 rounded-full
-                           hover:bg-gray-100 transition duration-300 ease-in-out
-                           transform hover:scale-105"
-                >
-                    Ver Productos
-                </a>
+        <p class="text-xl md:text-2xl text-white/85 mb-8 max-w-3xl mx-auto">
+            Suplementos y bienestar para cuidar tu salud, tu descanso
+            y tu rendimiento día a día.
+        </p>
 
-                <a
-                    href="{{ route('products.onSale') }}"
-                    class="border-2 border-white text-white font-bold py-4 px-8
-                           rounded-full hover:bg-white hover:text-primary-600
-                           transition duration-300 ease-in-out"
-                >
-                    🏷 Ofertas Especiales
-                </a>
-            </div>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a
+                href="{{ route('products.index') }}"
+                class="bg-white text-primary-700 font-bold py-4 px-8 rounded-full
+                       hover:bg-slate-100 transition duration-300 ease-in-out
+                       transform hover:scale-105"
+            >
+                Ver Productos
+            </a>
+
+            <a
+                href="{{ route('products.onSale') }}"
+                class="border-2 border-white/90 text-white font-bold py-4 px-8
+                       rounded-full hover:bg-white hover:text-primary-700
+                       transition duration-300 ease-in-out"
+            >
+                🏷 Ofertas Especiales
+            </a>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Categorías Destacadas -->
-    <section class="py-16">
-        <div class="container mx-auto px-6">
-            <h3 class="text-3xl font-bold mb-12 text-center text-gray-900">
-                Categorías Sesanus
-            </h3>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                @forelse($featuredCategories as $category)
-                    <x-category-card :category="$category" />
-                @empty
-                    <div class="col-span-full text-center py-12">
-                        <p class="text-gray-500 text-lg">
-                            No hay categorías disponibles.
-                        </p>
-                    </div>
-                @endforelse
-            </div>
-        </div>
-    </section>
 
     <!-- Productos Destacados -->
     <section class="py-16 bg-gray-100">

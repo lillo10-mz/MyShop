@@ -1,25 +1,27 @@
 @extends('layouts.public')
 
-@section('title', 'Categorías - Mi Tienda')
+@section('title', 'Categorías - Sesanus')
 
 @section('content')
-    <div class="container mx-auto px-6 py-8">
+    <div class="py-8">
+        {{-- Cabecera --}}
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900 mb-4">
+            <h1 class="page-title mb-2">
                 Nuestras Categorías
             </h1>
 
-            <p class="text-gray-600">
+            <p class="page-subtitle">
                 Explora nuestros productos por categoría.
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {{-- Grid de categorías --}}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             @forelse($categories as $category)
                 <x-category-card :category="$category" />
             @empty
                 <div class="col-span-full text-center py-12">
-                    <p class="text-gray-500 text-lg">
+                    <p class="text-slate-500 text-lg">
                         No hay categorías disponibles.
                     </p>
                 </div>
@@ -27,3 +29,4 @@
         </div>
     </div>
 @endsection
+
