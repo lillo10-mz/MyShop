@@ -6,9 +6,6 @@
     <!-- Hero Section -->
     <section class="bg-gradient-to-br from-primary-700 via-primary-500 to-accent text-white py-20 rounded-2xl shadow-sm">
     <div class="px-6 text-center">
-        <p class="text-white/80 font-semibold tracking-wide mb-3">
-            Sesanus
-        </p>
 
         <h2 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
             Bienvenido a <span class="text-white">Sesanus</span>
@@ -27,15 +24,6 @@
                        transform hover:scale-105"
             >
                 Ver Productos
-            </a>
-
-            <a
-                href="{{ route('products.onSale') }}"
-                class="border-2 border-white/90 text-white font-bold py-4 px-8
-                       rounded-full hover:bg-white hover:text-primary-700
-                       transition duration-300 ease-in-out"
-            >
-                🏷 Ofertas Especiales
             </a>
         </div>
     </div>

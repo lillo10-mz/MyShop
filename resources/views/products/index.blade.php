@@ -3,7 +3,6 @@
 @section('title', 'Todos los Productos - Sesanus')
 
 @section('content')
-    <div class="py-8">
         {{-- Cabecera --}}
         <div class="mb-8">
             <h1 class="page-title mb-2">Todos los Productos</h1>
@@ -104,5 +103,4 @@
                 </div>
             @endforelse
         </div>
-    </div>
 @endsection
