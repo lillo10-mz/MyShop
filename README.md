@@ -49,6 +49,7 @@ El proyecto simula el funcionamiento básico de un e-commerce real y ha sido des
 - **Blade**
 - **Tailwind CSS**
 - **Vite / NPM**
+- **Docker**
 - **Git y GitHub**
 
 ---
@@ -61,26 +62,13 @@ git clone https://github.com/lillo10-mz/MyShop.git
 cd MyShop
 ```
 
-### 2️⃣ Instalar dependencias backend
-```bash
-composer install
-```
-
-### 3️⃣ Instalar dependencias frontend
-```bash
-npm install
-npm run dev
-```
-
-### 4️⃣ Crear archivo de entorno
+### 2️⃣ Crear el archivo de entorno
 ```bash
 cp .env.example .env
 ```
 
-### 5️⃣ Configurar la base de datos
-
-Editar el archivo `.env` con los datos del entorno local:
-
+### 3️⃣ Configurar la base de datos
+Editar el archivo .env y dejar la base de datos así:
 ```env
 DB_CONNECTION=mysql
 DB_HOST=mysql
@@ -88,25 +76,41 @@ DB_PORT=3306
 DB_DATABASE=myshop
 DB_USERNAME=sail
 DB_PASSWORD=password
-DB_EXTRA_OPTIONS=
+
+```
+
+### 4️⃣ Instalar dependencias backend con Docker
+```bash
+docker run --rm \
+  -u "$(id -u):$(id -g)" \
+  -v "$(pwd):/var/www/html" \
+  -w /var/www/html \
+  laravelsail/php83-composer:latest \
+  composer install
+```
+
+### 5️⃣ Levantar el entorno con Laravel Sail
+```bash
+./vendor/bin/sail up -d
 ```
 
 ### 6️⃣ Generar clave de la aplicación
 ```bash
-php artisan key:generate
+./vendor/bin/sail artisan key:generate
 ```
 
 ### 7️⃣ Ejecutar migraciones
 ```bash
-php artisan migrate
+./vendor/bin/sail artisan migrate
 ```
 
-### 8️⃣ Iniciar servidor
+### 8️⃣ Instalar dependencias frontend y compilar assets
 ```bash
-php artisan serve
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run dev
 ```
 
-Acceder desde el navegador a:
+### Acceder desde el navegador a:
 ```
 http://localhost
 ```
