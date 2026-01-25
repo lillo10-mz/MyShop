@@ -1,148 +1,156 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🛍️ SESANUS – Tienda Online de Suplementos
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 📖 Descripción del proyecto
 
-## About Laravel
+**Sesanus** es una tienda online desarrollada con **Laravel**, orientada a la venta de productos relacionados con el bienestar, la salud y la suplementación deportiva.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-# MYSHOP
-
-Tienda online desarrollada con **Laravel** utilizando **Laravel Sail (Docker)** y datos mock para prácticas.
+El proyecto simula el funcionamiento básico de un e-commerce real y ha sido desarrollado con fines académicos, prestando atención tanto a la funcionalidad como al diseño y a la experiencia de usuario.
 
 ---
 
-## 📦 Requisitos
+## ⚙️ Funcionalidades implementadas
 
-Antes de empezar, asegúrate de tener instalado:
-
-- Docker Desktop
-- Git
-- WSL (en Windows) con Ubuntu
-- PHP y Composer
+- Página de inicio con productos destacados.
+- Listado de productos con buscador, filtros por categoría y ordenación.
+- Sistema de categorías para organizar los productos.
+- Sistema de ofertas con descuentos porcentuales y precios finales.
+- Página de detalle de producto.
+- Carrito de compra gestionado por sesión:
+  - Añadir, modificar y eliminar productos.
+  - Cálculo automático del total.
+- Lista de deseos:
+  - Los usuarios autenticados pueden guardar productos en su lista personal de deseos.
+- Gestión de stock:
+  - No se permite añadir productos sin stock.
+  - No se pueden superar las cantidades disponibles.
+  - Prevención de stock negativo.
+- Sistema de autenticación de usuarios.
+- Sistema de roles:
+  - **Administrador**: acceso al panel de administración y gestión de productos.
+  - **Usuario estándar**: navegación por la tienda y uso del carrito.
+- Seguridad y control de acceso:
+  - Protección de rutas mediante middleware.
+  - Acceso restringido a zonas administrativas.
+  - Elementos de administración visibles solo para administradores.
+- Persistencia de estado:
+  - El carrito, la lista de deseos y los filtros se mantienen durante la sesión del usuario.
+- Diseño responsive y experiencia de usuario cuidada.
+- Buenas prácticas:
+  - Uso de componentes Blade reutilizables.
+  - Separación entre lógica, vistas y estilos.
 
 ---
 
-## 🚀 Instalación del proyecto
+## 🛠️ Tecnologías utilizadas
+
+- **Laravel**
+- **PHP 8**
+- **MySQL**
+- **Blade**
+- **Tailwind CSS**
+- **Vite / NPM**
+- **Git y GitHub**
+
+---
+
+## 🚀 Instalación y despliegue
 
 ### 1️⃣ Clonar el repositorio
 ```bash
-git clone https://github.com/tu-usuario/MYSHOP.git //pon tu link
-cd MYSHOP
-2️⃣ Instalar dependencias de PHP
-bash
+git clone https://github.com/lillo10-mz/MyShop.git
+cd MyShop
+```
 
+### 2️⃣ Instalar dependencias backend
+```bash
 composer install
-3️⃣ Crear el archivo de entorno
-bash
+```
 
+### 3️⃣ Instalar dependencias frontend
+```bash
+npm install
+npm run dev
+```
+
+### 4️⃣ Crear archivo de entorno
+```bash
 cp .env.example .env
-4️⃣ Configurar variables de entorno
-Editar el archivo .env y comprobar las siguientes variables (ejemplo usando Sail):
+```
 
-env
+### 5️⃣ Configurar la base de datos
 
+Editar el archivo `.env` con los datos del entorno local:
+
+```env
 DB_CONNECTION=mysql
 DB_HOST=mysql
 DB_PORT=3306
 DB_DATABASE=myshop
 DB_USERNAME=sail
 DB_PASSWORD=password
-5️⃣ Generar la clave de la aplicación
-bash
+DB_EXTRA_OPTIONS=
+```
 
+### 6️⃣ Generar clave de la aplicación
+```bash
 php artisan key:generate
-6️⃣ Levantar el entorno con Docker (Laravel Sail)
-bash
+```
 
-./vendor/bin/sail up -d
-7️⃣ Ejecutar migraciones
-bash
+### 7️⃣ Ejecutar migraciones
+```bash
+php artisan migrate
+```
 
-./vendor/bin/sail artisan migrate
-8️⃣ Acceder a la aplicación
-Abrir el navegador y acceder a:
+### 8️⃣ Iniciar servidor
+```bash
+php artisan serve
+```
 
-arduino
-
+Acceder desde el navegador a:
+```
 http://localhost
-🛠️ Tecnologías utilizadas
-Laravel 12
+```
 
-Laravel Sail (Docker)
+---
 
-Laravel Telescope
+## 👤 Usuarios de prueba y roles
 
-Tailwind CSS
+### 🔑 Administrador
+- Acceso al panel de administración.
+- Gestión de productos y ofertas.
 
-PHP 8
+**Credenciales de ejemplo:**
+- Email: `admin@admin.com`
+- Contraseña: `Admin12345`
 
-MySQL
+### 👥 Usuario estándar
+- Navegación por la tienda.
+- Añadir productos al carrito y realizar pedidos.
 
-Redis
+**Credenciales de ejemplo:**
+- Email: `miguel@email.com`
+- Contraseña: `password123`
 
-ℹ️ Notas importantes
-El archivo .env no se sube al repositorio por motivos de seguridad.
-
-El archivo .env.example se utiliza como plantilla.
-
-El proyecto está orientado a prácticas académicas.
-
-Los datos de la tienda se cargan mediante archivos mock.
-
-👨‍🎓 Autor
-Proyecto realizado como práctica de Laravel.
+- Email: `pepe@email.com`
+- Contraseña: `pepepepe1`
 
 
+---
+
+## 👨‍🎓 Autor
+
+Proyecto realizado por: Miguel Zamora Ruiz  
+Asignatura: Desarrollo WEB en Entorno Servidor 
+Curso: 2ºDAW
+
+---
+
+## 📄 Licencia
+
+    Este proyecto está licenciado bajo Creative Commons BY-NC 4.0.
+    Esto significa que:
+     - Se permite usar y compartir el proyecto
+     - Se debe mencionar la autoría
+     - No está permitido el uso comercial
+    Más información:
+    https://creativecommons.org/licenses/by-nc/4.0/
